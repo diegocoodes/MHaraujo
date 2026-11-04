@@ -1,0 +1,51 @@
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 12% 25%, rgb(57 185 255 / 18%), transparent 52%),
+    radial-gradient(ellipse at 90% 65%, rgb(7 43 67 / 70%), transparent 58%),
+    #020509;
+}
+
+.site-background canvas {
+  position: absolute;
+  inset: 0;
+  transition: opacity 700ms ease;
+}
+
+.site-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 44%), rgb(0 0 0 / 72%) 22% 78%, rgb(0 0 0 / 44%)),
+    linear-gradient(0deg, rgb(0 0 0 / 65%), rgb(0 0 0 / 8%));
+}
+
+.site-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.site-shell .evolucao-section {
+  background: transparent;
+}
+
+.site-shell main :is(.panel-dark, .presentation-panel, .panel-gradient) {
+  background: rgb(5 9 13 / 94%);
+}
+
+@media (max-width: 767px) {
+  .site-background::after {
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 55%), rgb(0 0 0 / 72%) 20% 80%, rgb(0 0 0 / 55%)),
+      linear-gradient(0deg, rgb(0 0 0 / 65%), transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-background canvas { transition: none; }
+}

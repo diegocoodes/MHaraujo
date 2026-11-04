@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { createWhatsAppUrl, whatsappMessages } from "../../data/siteData";
+import "./Header.css";
 
 const menuItemVariants = {
   closed: { opacity: 0, x: 22 },
@@ -13,6 +15,7 @@ export default function Header({ navLinks }) {
   const [activeHref, setActiveHref] = useState("");
   const menuButtonRef = useRef(null);
   const menuRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -84,6 +87,7 @@ export default function Header({ navLinks }) {
   }, [menuOpen]);
 
   return (
+    <>
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container nav-shell">
         <a href="#topo" className="brand" aria-label="Ir para o topo">
@@ -116,7 +120,9 @@ export default function Header({ navLinks }) {
           <span />
         </button>
       </div>
+    </header>
 
+      {createPortal(
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -128,7 +134,7 @@ export default function Header({ navLinks }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.24 }}
+              transition={{ duration: reduceMotion ? 0 : 0.24 }}
               onClick={() => setMenuOpen(false)}
             />
 
@@ -139,10 +145,10 @@ export default function Header({ navLinks }) {
               role="dialog"
               aria-modal="true"
               aria-labelledby="mobile-menu-title"
-              initial={{ x: "105%", opacity: 0.6 }}
+              initial={{ x: reduceMotion ? 0 : "105%", opacity: reduceMotion ? 1 : 0.6 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "105%", opacity: 0.6 }}
-              transition={{ type: "spring", stiffness: 330, damping: 34 }}
+              exit={{ x: reduceMotion ? 0 : "105%", opacity: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 330, damping: 34 }}
             >
               <div className="mobile-menu-header">
                 <a href="#topo" className="mobile-menu-brand" aria-label="Voltar ao início" onClick={() => setMenuOpen(false)}>
@@ -168,7 +174,7 @@ export default function Header({ navLinks }) {
                 aria-label="Navegação mobile"
                 initial="closed"
                 animate="open"
-                variants={{ open: { transition: { delayChildren: 0.1, staggerChildren: 0.055 } } }}
+                variants={{ open: { transition: { delayChildren: reduceMotion ? 0 : 0.1, staggerChildren: reduceMotion ? 0 : 0.055 } } }}
               >
                 {navLinks.map((item) => (
                   <motion.a
@@ -176,7 +182,7 @@ export default function Header({ navLinks }) {
                     href={item.href}
                     aria-current={activeHref === item.href ? "page" : undefined}
                     variants={menuItemVariants}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    transition={{ duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
                     onClick={() => setMenuOpen(false)}
                   >
                     <span className="mobile-menu-label">{item.label}</span>
@@ -195,7 +201,9 @@ export default function Header({ navLinks }) {
             </motion.aside>
           </>
         )}
-      </AnimatePresence>
-    </header>
+      </AnimatePresence>,
+      document.body,
+      )}
+    </>
   );
 }

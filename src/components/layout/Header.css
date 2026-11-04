@@ -1,0 +1,44 @@
+/* A body portal keeps the drawer independent of the header's backdrop filter. */
+.mobile-menu-backdrop {
+  z-index: 10020;
+}
+
+.mobile-menu {
+  z-index: 10021;
+  max-height: calc(100vh - 1.1rem);
+  max-height: calc(100dvh - 1.1rem);
+}
+
+@media (max-width: 1023px) {
+  .mobile-menu-backdrop { z-index: 10020; }
+  .mobile-menu { z-index: 10021; }
+
+  .mobile-menu-nav a {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.hamburger span {
+  transition: transform 200ms ease, opacity 150ms ease;
+}
+
+.hamburger[aria-expanded="true"] span:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger[aria-expanded="true"] span:last-child {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* The drawer sits above the decorative logo cursor. */
+body.custom-cursor-active :is(.mobile-menu, .mobile-menu *) {
+  cursor: auto !important;
+}
+
+body.custom-cursor-active :is(.mobile-menu-backdrop, .mobile-menu a, .mobile-menu button, .mobile-menu a *, .mobile-menu button *) {
+  cursor: pointer !important;
+}

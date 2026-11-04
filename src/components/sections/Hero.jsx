@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { fadeUp } from "../../animations/fadeUp";
+import { fadeUp, textFade } from "../../animations/fadeUp";
 import { createWhatsAppUrl, whatsappMessages } from "../../data/siteData";
+import RevealText from "../common/RevealText";
 
 const titleContainer = {
   hidden: {},
@@ -37,7 +38,7 @@ export default function Hero({ ready = true }) {
               initial="hidden"
               animate={ready ? "visible" : "hidden"}
             >
-              <motion.h1 variants={mobileTitleItem}>Matheus Personal Trainer</motion.h1>
+              <RevealText as="h1" active={ready} highlight={["Trainer"]}>Matheus Personal Trainer</RevealText>
               <motion.p variants={mobileTitleItem}>Treinos personalizados para você evoluir com resultado, disciplina e segurança.</motion.p>
             </motion.div>
 
@@ -46,19 +47,19 @@ export default function Hero({ ready = true }) {
               <span className="hero-line-mask"><motion.span className="neon" variants={titleLine}>TREINO, MÉTODO E ACOMPANHAMENTO</motion.span></span>
             </motion.h1>
 
-            <p className="hero-subtitle">
+            <motion.p className="hero-subtitle" variants={textFade} custom={2} initial="hidden" animate={ready ? "visible" : "hidden"}>
               Especialista em hipertrofia e emagrecimento. Treinos personalizados com método, ciência e acompanhamento real para você
               evoluir com consistência.
-            </p>
+            </motion.p>
 
-            <div className="hero-actions">
-              <a className="btn btn-primary" href={createWhatsAppUrl(whatsappMessages.evolucao)} target="_blank" rel="noreferrer">
+            <motion.div className="hero-actions" initial="hidden" animate={ready ? "visible" : "hidden"}>
+              <motion.a variants={textFade} custom={3} className="btn btn-primary" href={createWhatsAppUrl(whatsappMessages.evolucao)} target="_blank" rel="noreferrer">
                 COMEÇAR MINHA EVOLUÇÃO
-              </a>
-              <a className="btn btn-dark" href="#planos">
+              </motion.a>
+              <motion.a variants={textFade} custom={4} className="btn btn-dark" href="#planos">
                 VER PLANOS
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
 

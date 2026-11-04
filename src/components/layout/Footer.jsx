@@ -1,11 +1,13 @@
 import { createWhatsAppUrl, whatsappMessages } from "../../data/siteData";
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations/fadeUp";
 
 export default function Footer({ navLinks }) {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer id="contato" className="footer">
-      <div className="container footer-shell">
+      <motion.div className="container footer-shell" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
         <div className="footer-brand-block">
           <a href="#topo" className="footer-brand" aria-label="Voltar ao topo">
             <img src="/images/hero-logo-matheus.png" alt="Logo Matheus Araújo" className="footer-logo" />
@@ -34,7 +36,7 @@ export default function Footer({ navLinks }) {
           </a>
           <p>© {currentYear} Matheus Araújo · Personal Trainer</p>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

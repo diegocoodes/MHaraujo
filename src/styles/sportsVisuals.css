@@ -1,0 +1,59 @@
+.section-connector {
+  height: 60px;
+  padding-block: 5px;
+  pointer-events: none;
+}
+
+.section-connector svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.connector-track { stroke: #1e2d37; stroke-width: 1px; }
+.connector-accent { stroke: var(--neon); stroke-width: 1.5px; }
+
+.sports-panel {
+  isolation: isolate;
+}
+
+.sports-panel > :is(.sobre-grid, .presentation-grid) {
+  position: relative;
+  z-index: 1;
+}
+
+.sports-panel::after {
+  content: "";
+  position: absolute;
+  right: -28px;
+  bottom: 26px;
+  width: 150px;
+  height: 44px;
+  background: repeating-linear-gradient(90deg, transparent 0 14px, rgb(57 185 255 / 12%) 14px 21px);
+  transform: skewX(-30deg);
+  pointer-events: none;
+}
+
+.brand-watermark {
+  position: absolute;
+  top: -40px;
+  right: -55px;
+  width: clamp(300px, 48vw, 640px);
+  opacity: 0.045;
+  pointer-events: none;
+  user-select: none;
+}
+
+.brand-watermark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(1);
+}
+
+@media (max-width: 767px) {
+  .section-connector { height: 38px; }
+  .brand-watermark { top: 20px; right: -70px; width: 350px; opacity: 0.03; }
+  .sports-panel::after { width: 100px; height: 32px; opacity: 0.6; }
+}
