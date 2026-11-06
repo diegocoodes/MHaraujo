@@ -1,6 +1,6 @@
 // Campaign data stays separate from the regular plans and their WhatsApp messages.
 export const blackNovemberCampaign = {
-  enabled: false,
+  enabled: true,
   plannedActivationDate: "2026-11-07",
 };
 

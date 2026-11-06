@@ -58,7 +58,7 @@ npm run preview
 
 ## Campanha Black November
 
-A campanha está salva e desativada em `src/data/blackNovember.js`, com `blackNovemberCampaign.enabled: false`. A reativação manual está prevista para **07/11/2026 (sábado)**; a data registrada não ativa o modal automaticamente.
+A campanha está ativa em `src/data/blackNovember.js`, com `blackNovemberCampaign.enabled: true`. O controle é manual; a data registrada no arquivo não altera o estado da campanha automaticamente.
 
 Para ativar, altere apenas `enabled` para `true` e publique a atualização. Para desativar, volte para `false`. Quando ativa, a campanha abre assim que a landing page é renderizada, inclusive a cada recarregamento, sem atraso ou bloqueio por sessão.
 
